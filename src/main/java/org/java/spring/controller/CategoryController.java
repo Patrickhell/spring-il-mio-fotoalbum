@@ -28,28 +28,28 @@ public class CategoryController {
 	private ImageServ imageServ;
 	
 	
-	@GetMapping("/CaregoryList")
-	public String getAllIngredients(Model model) {
+	@GetMapping("/CategoryList")
+	public String getAllCategories(Model model) {
 		
 		List<Category> categories = categoryServ.findAll();
 		
-		model.addAttribute("categories ", categories );
+		model.addAttribute("categories", categories );
 		
-		return "CaregoryListPage";
+		return "CategoryList";
 		
 	}
 	
 	@GetMapping("/category/create")
 	public String createNewCategory(Model model) {
 		
-		model.addAttribute("singleCategory", new Category());
+		model.addAttribute("category", new Category());
 		
 		
-		return"/category-form";
+		return"/Category-form";
 	}
 	
-	@PostMapping("/icategory/create")
-	public String storeCategory(Model model, @Valid @ModelAttribute Category category, BindingResult bindingResult) {
+	@PostMapping("/category/create")
+	public String storeCategory(Model model, @Valid @ModelAttribute Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		
         if(bindingResult.hasErrors()) {
 			
@@ -57,12 +57,13 @@ public class CategoryController {
 			
 			model.addAttribute("category", category);
 			
-			return "/category-form";
+			return "/Category-form";
 		}
 		
         categoryServ.save(category);
+        redirectAttributes.addFlashAttribute("storeCategory", category);
 		
-		return "redirect:/CategorytList";
+		return "redirect:/CategoryList";
 	}
 	
 	@PostMapping("/Category/delete/{id}")
@@ -83,7 +84,7 @@ public class CategoryController {
 		redirectAttributes.addFlashAttribute("deleteCategory", singleCategory);
 		
 		
-		return "redirect:/CategorytList";
+		return "redirect:/CategoryList";
 		
 	}
 }

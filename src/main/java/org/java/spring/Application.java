@@ -2,6 +2,11 @@ package org.java.spring;
 
 
 import org.java.spring.db.pojo.Image;
+import org.java.spring.auth.conf.AuthConf;
+import org.java.spring.auth.db.Role;
+import org.java.spring.auth.db.User;
+import org.java.spring.auth.db.service.RoleService;
+import org.java.spring.auth.db.service.UserService;
 import org.java.spring.db.pojo.Category;
 import org.java.spring.db.service.CategoryServ;
 import org.java.spring.db.service.ImageServ;
@@ -17,6 +22,13 @@ public class Application implements CommandLineRunner{
 	
 	@Autowired
     private CategoryServ categoryServ;
+	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private UserService userService;
+	
 	
 	
 	@Override
@@ -66,33 +78,33 @@ public class Application implements CommandLineRunner{
 				
 		
 		Image img1 = new Image("Tramonto sulla spiaggia", "Una vista mozzafiato del tramonto sul mare con le onde che lambiscono la spiaggia.",
-				true, "https://www.google.it/url?sa=i&url=https%3A%2F%2Fit.freepik.com%2Ffoto-vettori-gratuito%2Fnatura&psig=AOvVaw1n-lZUEc4bAfLp5bAZrVlb&ust=1702734761033000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi_ztfLkYMDFQAAAAAdAAAAABAX",  cat1, cat2, cat3);
+				true, "https://www.gedistatic.it/content/gedi/img/huffingtonpost/2022/01/20/154926891-9bb22203-9661-4b57-a06a-29c9d6ee8c97.jpg",  cat1, cat2, cat3);
 		
 		Image img2 = new Image("Raccolta autunnale", "Una varietà di foglie secche cadute durante l'autunno, con colori vividi e accattivanti.",
-				 true,"https://www.google.it/url?sa=i&url=https%3A%2F%2Filritrattodellasalute.tiscali.it%2Fnotizie%2Farticoli%2Fnatura-benessere-corpo-mente%2F&psig=AOvVaw1n-lZUEc4bAfLp5bAZrVlb&ust=1702734761033000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi_ztfLkYMDFQAAAAAdAAAAABAn", cat1, cat4, cat5);
+				 true,"https://www.skuola.net/news_foto/2018/tema-ecologia-natura.jpg", cat1, cat4, cat5);
 		
 		Image img3 = new Image("Gatto sonnolento", "Un gatto domestico che si gode un pisolino tranquillo accanto alla finestra.", 
-				true, "https://www.google.it/url?sa=i&url=http%3A%2F%2Fwww.psicologolucamasini.it%2Fit%2Farticolo%2Feffetto-benefico-della-natura-&psig=AOvVaw1n-lZUEc4bAfLp5bAZrVlb&ust=1702734761033000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi_ztfLkYMDFQAAAAAdAAAAABAv", cat6, cat7, cat8);
+				true, "https://media.rds.it/web/wp-content/uploads/2021/04/parco-green-list.jpg", cat6, cat7, cat8);
 		
 	
 		Image img4 = new Image("Architettura urbana","Un'immagine delle moderne architetture urbane con linee nette e riflessi di vetro.",
-				true,  "https://www.google.it/url?sa=i&url=https%3A%2F%2Fwww.costacrociere.it%2Fcosta-club%2Fmagazine%2Fnatura.html&psig=AOvVaw1n-lZUEc4bAfLp5bAZrVlb&ust=1702734761033000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi_ztfLkYMDFQAAAAAdAAAAABA3", cat9, cat10, cat11);
+				true,  "https://cdn.studenti.stbm.it/images/2021/10/13/tema-sul-rapporto-uomo-natura-nella-letteratura_600x400.jpeg", cat9, cat10, cat11);
 		
 		
 		Image img5 = new Image("Fiori primaverili", "Un mazzo di fiori colorati che sbocciano durante la primavera, creando uno scenario incantevole.",
 				
-				false, "https://www.google.it/url?sa=i&url=https%3A%2F%2Fit.vecteezy.com%2Ffoto-gratuito%2Fnatura&psig=AOvVaw1n-lZUEc4bAfLp5bAZrVlb&ust=1702734761033000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi_ztfLkYMDFQAAAAAdAAAAABA_", cat1, cat12, cat13);
+				false, "https://www.focus.it/images/2021/09/20/autunno-orig.jpeg", cat1, cat12, cat13);
 		
 		
 		Image img6 = new Image("Vista aerea della foresta","Una prospettiva dall'alto di una foresta lussureggiante con alberi verdi e un fiume serpeggiante.",
-				true, "https://www.google.it/url?sa=i&url=https%3A%2F%2Fgognablog.sherpa-gate.com%2Fi-diritti-della-natura%2F&psig=AOvVaw1n-lZUEc4bAfLp5bAZrVlb&ust=1702734761033000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi_ztfLkYMDFQAAAAAdAAAAABBH", cat1, cat14 );
+				true, "https://www.focus.it/images/2021/09/20/autunno-orig.jpeg", cat1, cat14 );
 		
 		Image img7 = new Image("Città di notte", "Una fotografia notturna di una città vivace con luci scintillanti e grattacieli illuminati.",
-				true,"https://www.google.it/url?sa=i&url=https%3A%2F%2Fwww.ad-italia.it%2Fluoghi%2Fitinerari%2F2020%2F04%2F30%2Fpaesaggi-che-rilassano-e-il-respiro-della-natura%2F&psig=AOvVaw1n-lZUEc4bAfLp5bAZrVlb&ust=1702734761033000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi_ztfLkYMDFQAAAAAdAAAAABBP", cat10, cat15, cat16);
+				true,"https://mbnatural.altervista.org/wp-content/uploads/2021/04/natura-varesepuo-1200x800_c.jpg", cat10, cat15, cat16);
 		
 		
 		Image img8 = new Image("Vista aerea delle montagne", "Una veduta panoramica dall'alto delle imponenti montagne con vette innevate e boschi.",
-				false, "https://www.google.it/url?sa=i&url=https%3A%2F%2Fwww.massimomarchioro.it%2Ftag%2Fcolori-natura%2F&psig=AOvVaw1n-lZUEc4bAfLp5bAZrVlb&ust=1702734761033000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi_ztfLkYMDFQAAAAAdAAAAABBX", cat1, cat17);
+				false, "https://www.latitudeslife.com/wp-content/uploads/foresta-tropicale-natura-primordiale.jpg", cat1, cat17);
 		
 		
 		imageServ.save(img1);
@@ -103,6 +115,22 @@ public class Application implements CommandLineRunner{
 		imageServ.save(img6);
 		imageServ.save(img7);
 		imageServ.save(img8);
+		
+		Role roleUser = new Role("USER");
+		Role roleAdmin = new Role("ADMIN");
+		
+		roleService.save(roleUser);
+		roleService.save(roleAdmin);
+		
+		String pwsUser = AuthConf.passwordEncoder().encode("pws");
+		String pwsAdmin = AuthConf.passwordEncoder().encode("pws");
+		
+		
+		User patrickUser = new User("patrickUser", pwsUser , roleUser);
+		User patrickAdmin= new User("patrickAdmin", pwsAdmin, roleAdmin);
+		
+		userService.save(patrickUser);
+		userService.save(patrickAdmin);
 		
 	}
 

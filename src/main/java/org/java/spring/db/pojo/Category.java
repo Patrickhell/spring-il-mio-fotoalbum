@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Category {
@@ -22,6 +23,7 @@ public class Category {
 	
 	@Column(nullable = false, unique = true)
 	@Length ( max = 100, message = "Il nome aver un massimo dii 60 caratteri")
+	@NotEmpty
 	private String name;
 	
 	@ManyToMany(mappedBy = "categories")

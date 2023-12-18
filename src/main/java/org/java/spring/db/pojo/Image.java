@@ -23,6 +23,7 @@ public class Image {
 	private int id;
 	
 	@Column(nullable = false, unique = true)
+	@NotEmpty(message = "Il campo descrizione non può essere vuoto")
 	@Length (min = 5, max = 60, message = "Il nome aver un numero di caratteri compreso tra 5 e 60")
 	private String name;
 	
@@ -34,7 +35,7 @@ public class Image {
 	@Column
 	private boolean isVisible;
 	
-	@Column(length = 300)
+	@Column(length = 255)
 	@NotEmpty(message = "Il image Url nome non può essere vuoto")
 	private String foto;
 	

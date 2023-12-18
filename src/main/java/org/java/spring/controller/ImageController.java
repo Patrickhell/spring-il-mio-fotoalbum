@@ -8,6 +8,7 @@ import org.java.spring.db.pojo.Image;
 import org.java.spring.db.service.CategoryServ;
 import org.java.spring.db.service.ImageServ;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -61,16 +62,17 @@ public class ImageController {
 	@GetMapping("/image/create")
 	public String CreatenewImage(Model model) {
 		
-		List<Category> Categories = categoryServ.findAll();
+		List<Category> categories = categoryServ.findAll();
+	    
 		
 		model.addAttribute("image", new Image());
-		model.addAttribute("categories", Categories);
+		model.addAttribute("categories", categories);
 		
-		return "/image-form";
+		return "/Image-form";
 	}
 	
 	@PostMapping("/image/create")
-	public String ImageStore(Model  model, @Valid @ModelAttribute Image image, BindingResult bindingResult) {
+	public String ImageStore(Model  model, @Valid @ModelAttribute Image image, BindingResult bindingResult, @RequestParam(required = false) boolean isVisible) {
 		
 
 		if(bindingResult.hasErrors()) {
@@ -78,8 +80,9 @@ public class ImageController {
 			System.out.println(bindingResult);
 			model.addAttribute("image", image);
 			
-			return "/image-form";
+			return "/Image-form";
 		}
+		 image.setVisible(isVisible);
 		
 		imageServ.save(image);
 		
@@ -93,10 +96,10 @@ public class ImageController {
 		List<Category> categories = categoryServ.findAll();
 		Image singleImage = imageServ.findById(id);
 		
-		model.addAttribute("singleImage", singleImage);
+		model.addAttribute("image", singleImage);
 		model.addAttribute("categories", categories);
 		
-		return"/image-edit";
+		return"/Image-edit";
 		
 		
 	}
@@ -109,7 +112,7 @@ public class ImageController {
 			System.out.println(bindingResult);
 			model.addAttribute("image", image);
 			
-			return "/image-edit";
+			return "/Image-edit";
 		}
        imageServ.save(image);
        
