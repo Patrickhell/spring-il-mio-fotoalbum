@@ -1,0 +1,34 @@
+*{
+	margin: 0 auto;
+	box-sizing: border-box;
+	padding: 0;
+	
+}
+
+.container{
+	width: 900px;
+	margin: 2rem auto;
+	margin: auto;
+	
+}
+ .card-container{
+	 width: 100%;
+	 display: flex;
+	
+ }
+
+.singlecard{
+	
+	 width: calc(100% / 3) - 1rem;
+	 margin: 2rem;
+}
+
+a{
+	text-decoration:none;
+	color: cadetblue;
+	
+}
+
+ul{
+	list-style: none;
+}
