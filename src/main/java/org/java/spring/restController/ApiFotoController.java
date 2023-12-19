@@ -33,7 +33,7 @@ public class ApiFotoController {
 	        images = imageServ.findAll(); 
 	        
 	    } else {
-	        images = imageServ.findByNameLike(query); 
+	        images = imageServ.findByName(query);
 	    }
 	    
 		return new ResponseEntity<>(images, HttpStatus.OK);
