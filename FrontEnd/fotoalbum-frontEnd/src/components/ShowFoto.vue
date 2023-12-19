@@ -1,14 +1,14 @@
 <template>
-    <div class="container" v-if="image">
-        <h1>La mia Foto</h1>
-       <div class="card" style="width: 30rem;">
+    <h1 class="text-center">La mia Foto</h1>
+    <div class="container d-flex" v-if="image">
+       <div class="card m-auto" style="width: 20rem;">
             <button type="button" class="btn-close close-button" data-bs-dismiss="alert" aria-label="Close" @click="$emit('closeImage')"></button>
             <img :src="image.foto" class="card-img-top" alt="...">
             <div class="card-body" style=" background-color: rgb(190, 198, 205)">
-                <h5 class="card-title name-linked">{{image.name}}</h5>
-                <p class="card-text">{{image.description}}</p>
+                <h5 class="card-title name-linked"> Titolo: {{image.name}}</h5>
+                <p class="card-text"><span class="fw-semibold">Descrizione: </span> {{image.description}}</p>
                 <div>	
-                    <span>Categorie:</span>	   
+                    <span class="fw-semibold">Categorie: </span>	   
 			        <span v-for="category in image.categories">
                         <span>
                          {{ category.name + " ," }}
@@ -53,8 +53,9 @@ onMounted(showFoto);
 .close-button, .name-linked{
   cursor: pointer;
 }
-
 .container{
-    margin:0 auto;
+	width: 900px;
+    margin: 4rem auto
+	
 }
 </style>

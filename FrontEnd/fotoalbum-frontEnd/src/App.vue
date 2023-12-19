@@ -93,7 +93,7 @@ onMounted(updateImage);
 <style >
 .container{
 width: 900px;
-  margin: 0 auto;
+  margin: 1rem auto;
 }
 
 
