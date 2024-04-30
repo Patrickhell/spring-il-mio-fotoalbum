@@ -13,5 +13,8 @@ public interface ImageRepo  extends JpaRepository<Image, Integer> {
 	List<Image> findByNameContainingIgnoreCase(String query);
 	
 	List<Image> findByNameLikeIgnoreCase(String query);
+	
+	List<Image> findImageByUserProfileId(int userProfileId);
+	
 
 }

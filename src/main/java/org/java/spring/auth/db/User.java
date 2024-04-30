@@ -3,10 +3,12 @@ package org.java.spring.auth.db;
 import java.util.Collection;
 import java.util.List;
 
+import org.java.spring.db.pojo.UserProfile;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -23,7 +26,7 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	@NotNull
 	private String username;
 	
@@ -31,11 +34,18 @@ public class User implements UserDetails {
 	@NotNull
 	private String password;
 	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private UserProfile userProfile;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private RegisterUser registerUser;
+	
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role> roles;
 	
-	public User() { }
+	
+	public User() {}
 	public User(String username, String password, Role... roles) {
 		
 		setUsername(username);
@@ -73,6 +83,17 @@ public class User implements UserDetails {
 		setRoles(List.of(roles));
 	}
 	
+	
+	
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+	
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+	
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
@@ -93,5 +114,9 @@ public class User implements UserDetails {
 	public String toString() {
 		
 		return "[" + getId() + "] " + getUsername();
+	}
+	public boolean isPresent() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

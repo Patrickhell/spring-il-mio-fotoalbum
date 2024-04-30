@@ -4,8 +4,6 @@
  <main>
 	 <div class="container text-center">
 		 
-		Utente: <span  sec:authentication="name"></span>
-		
 	   <h1 class="text-center"> Le mie Foto</h1>
 	   <h2 th:if="${deleteImage != null}"  class="alert alert-success alert-dismissible fade show" role="alert" >
 		  Image: '[[${deleteImage.name}]]',cancellata con successo!!
@@ -13,7 +11,7 @@
 	   </h2>
 	 
 	   <div class="container">
-         <div class="row row-cols-1 row-cols-md-3 g-4">
+         <div class="row row-cols-1 row-cols-md-3 ">
             <div class="col " th:each="image : ${images}" th:if="${images.size}> 0" >
                <div class="card singlecard" style="background-color: rgb(0, 41, 77); width: 280px;">
                  <img th:src="${image.foto}" class="card-img-top" alt="image" style="height: 200px;">

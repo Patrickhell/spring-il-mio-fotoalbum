@@ -8,7 +8,6 @@ import org.java.spring.db.pojo.Image;
 import org.java.spring.db.service.CategoryServ;
 import org.java.spring.db.service.ImageServ;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
 
+
+
 @Controller
 public class ImageController {
 	
@@ -32,20 +33,6 @@ public class ImageController {
 	private CategoryServ categoryServ;
 	
 	
-	@GetMapping
-	public String getImages(Model model,  @RequestParam(required = false) String query) {
-		
-		
-		List<Image> images = query == null ? imageServ.findAll() : imageServ.findByName(query);
-		
-		model.addAttribute("images", images);
-		model.addAttribute("query", query == null ? "" : query);
-		
-		return "ImageIndex";
-				
-		
-	}
-
 	
 	@GetMapping("/image/{id}")
 	public String getSingleImage(Model model, @PathVariable int id) {
@@ -72,7 +59,7 @@ public class ImageController {
 	}
 	
 	@PostMapping("/image/create")
-	public String ImageStore(Model  model, @Valid @ModelAttribute Image image, BindingResult bindingResult, @RequestParam(required = false) boolean isVisible) {
+	public String ImageStore(Model  model, @Valid @ModelAttribute Image image, BindingResult bindingResult) {
 		
 
 		if(bindingResult.hasErrors()) {
@@ -82,10 +69,9 @@ public class ImageController {
 			
 			return "/Image-form";
 		}
-		 image.setVisible(isVisible);
-		
-		imageServ.save(image);
-		
+
+	    imageServ.save(image);
+	    		
 		return "redirect:/";
 		
 	}
@@ -116,7 +102,7 @@ public class ImageController {
 		}
        imageServ.save(image);
        
-       return"redirect:/";
+       return"redirect:/image/{id}";
 	}
 	
 	@PostMapping("image/delete/{id}") 

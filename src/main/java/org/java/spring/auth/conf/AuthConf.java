@@ -32,9 +32,9 @@ public class AuthConf {
         .requestMatchers("/login").permitAll()
         .requestMatchers("/api/**").permitAll()
         .requestMatchers("/").hasAnyAuthority("USER", "ADMIN")
-        .requestMatchers(new RegexRequestMatcher("/image/[0-10]+", null)).hasAuthority("ADMIN")
-        .requestMatchers("/*/create/**").hasAuthority("ADMIN")
-        .requestMatchers("/*/edit/**").hasAuthority("ADMIN")
+        .requestMatchers(new RegexRequestMatcher("/image/[0-10]+", null)).hasAuthority( "ADMIN")
+        .requestMatchers("/*/create/**").hasAnyAuthority("USER", "ADMIN")
+        .requestMatchers("/*/edit/**").hasAnyAuthority("USER", "ADMIN")
         .and().formLogin()
         .and().logout();
 		

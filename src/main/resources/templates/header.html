@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
+
    <header th:fragment="header()">
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
@@ -11,38 +8,45 @@
             <span class="navbar-toggler-icon"></span>
          </button>
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-			    <a  aria-current="page" class="mx-3"
-                   th:insert = "fragment ::button('/logout', 'Logout')"
-                   style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1rem;">
-               </a> 
-               <a  aria-current="page" class="mx-3"
+            <div class="navbar-nav d-flex justify-content-between w-100">
+               <div class="d-flex justify-content-start">
+				 <a  aria-current="page"
                   th:insert = "fragment ::button('/', 'Home')"
                   style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1rem;">
-                  Home
-               </a>
-               <a  aria-current="page" class="mx-3"
-                  th:insert = "fragment ::button('/image/create', 'Crea una foto')"
-                  sec:authorize="hasAuthority('ADMIN')"
-                  style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1rem;">
-               </a>
-               <a  aria-current="page" class="mx-3"
+                 </a>
+                 <a  aria-current="page" class="mx-3"
                   th:insert = "fragment ::button('/CategoryList', 'Categorie')"
                   sec:authorize="hasAuthority('ADMIN')"
                   style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1rem;">
-               </a>
-               <div class="mx-4 m-auto">
-				   <form class="d-flex" role="search">
+                 </a>
+                 <a  aria-current="page" class="mx-3"
+                  th:insert = "fragment ::button('/create/profile', 'Crea il tuo profilo')"
+                  style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1rem;">      
+                 </a>
+			   </div>
+               <div class="d-flex justify-content-center">
+				   <form class="d-flex" role="search" style="width: 500px;">
 					   <input class="form-control me-2" type="text" name="query" th:value="${query}" aria-label="Search">
 					   <button class="btn btn-outline-success" type="submit" >
 						   Search
 					   </button>
 				   </form>
 			   </div>
+			   <div class="d-flex justify-content-end">
+			     <a  aria-current="page" class="mx-3 text-line"
+                   th:insert = "fragment ::button('/loginORegistration', 'Logout')"
+                   style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1rem;">
+                 </a> 
+                 <a  aria-current="page" class="mx-3"
+                   th:insert = "fragment ::button('/registration', 'Registrati')"
+                   sec:authorize="hasAuthority('ADMIN')"
+                   style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1rem;">
+                 </a> 
+			   </div>
+			   
             </div>
          </div>
        </div>
      </nav>
    </header>
- </body>
 <html>

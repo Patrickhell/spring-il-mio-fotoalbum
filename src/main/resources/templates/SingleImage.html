@@ -4,7 +4,7 @@
    <main class="container" th:object="${singleImage}">
 	   <div class="singleCard">
 	      <h1 class="text-center"> La mia Foto</h1>
-	      <div class="card" style="width:auto; background-color: rgb(0, 41, 77);color: cadetblue">
+	      <div class="card" style="width: 600px; background-color: rgb(0, 41, 77);color: cadetblue ">
               <div class="row g-0 p-0">
                  <div class="col-md-5">
                     <img th:src ="${singleImage.foto}" class="img-fluid rounded-center" alt="...">
@@ -22,6 +22,7 @@
 			               th:text ="${category.name + ' , '}" 
 			          >    		         
                       </span> 
+                      
 	                </div>
                  </div>   
                </div>
@@ -31,17 +32,16 @@
 	      <div>
 			 <a aria-current="page" class="btn btn-outline-success"
                 th:href="@{/image/edit/{id} (id=${singleImage.id})}"
-                sec:authorize="hasAuthority('ADMIN')"
              >
-                Modifica
+                <i class="fa-solid fa-pen"></i>
              </a>
 		  </div>
           <div>
-		     <form th:action="@{/image/delete/{id} (id=${singleImage.id})}" method="POST"
-		           sec:authorize="hasAuthority('ADMIN')"
-		     >
-			    <input class="btn btn-outline-success " type="submit" value="Cancella">
-	         </form>
+		     <form th:action="@{/image/delete/{id} (id=${singleImage.id})}" method="POST">
+               <button type="submit" class="btn btn-outline-success">
+                 <i class="fa-solid fa-trash"></i>
+               </button>	        
+             </form>
 		  </div>
        </div>
    </main>

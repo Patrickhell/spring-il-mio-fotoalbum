@@ -65,7 +65,7 @@ public class ApiFotoController {
 		image.setName(newImage.getName());
 		image.setDescription(newImage.getDescription());
 		image.setFoto(newImage.getFoto());
-		image.setVisible(newImage.isVisible());
+		image.setIsVisible(newImage.getIsVisible());
 		
 		imageServ.save(image);
 		

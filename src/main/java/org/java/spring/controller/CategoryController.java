@@ -61,7 +61,7 @@ public class CategoryController {
 		}
 		
         categoryServ.save(category);
-        redirectAttributes.addFlashAttribute("storeCategory", category);
+        redirectAttributes.addFlashAttribute("storeCategory", "Categoria creata con successo");
 		
 		return "redirect:/CategoryList";
 	}
@@ -81,7 +81,7 @@ public class CategoryController {
 		
 		categoryServ.delete(singleCategory);
 		
-		redirectAttributes.addFlashAttribute("deleteCategory", singleCategory);
+		redirectAttributes.addFlashAttribute("deleteCategory", "Categoria Cancellata con successo");
 		
 		
 		return "redirect:/CategoryList";

@@ -4,11 +4,13 @@
 	padding: 0;
 	
 }
-
+header{
+	
+	width: 1150px;
+}
 .container{
-	width: 900px;
-	margin: 2rem auto;
-	margin: auto;
+	width: 1200px;
+	
 	
 }
  .card-container{
@@ -20,15 +22,50 @@
 .singlecard{
 	
 	 width: calc(100% / 3) - 1rem;
-	 margin: 2rem;
+	 margin: 1rem;
 }
 
 a{
 	text-decoration:none;
-	color: cadetblue;
 	
 }
 
 ul{
 	list-style: none;
+	list-style-type: none;
+}
+
+.font-title{
+	font-size: 18px;
+}
+
+.flex-wrap{
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+}
+
+.margin-topTable{
+	
+	margin: 7rem auto;
+}
+
+.pagination-container{
+	
+	width: 400px;
+}
+li.active{
+	color:dodgerblue;
+	margin-top: .5rem;
+}
+
+.page-link {
+    color: #000;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 0.25rem;
+}
+tr.table-font{
+	
+	font-size: 14px;
 }

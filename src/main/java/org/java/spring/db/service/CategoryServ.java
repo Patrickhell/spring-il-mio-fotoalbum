@@ -1,6 +1,7 @@
 package org.java.spring.db.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.java.spring.db.pojo.Category;
 import org.java.spring.db.repo.CategoryRepo;
@@ -25,8 +26,16 @@ public class CategoryServ {
 	}
 	public void save(Category category) {
 		
+		Optional<Category> findByNameIfExist = categoryRepo.findByName(category.getName());
+			
+			if(findByNameIfExist.isPresent()) {
+				
+				throw new IllegalStateException("La categoria" + category.getName() + "è gia esistente");
+			}
+		
 		categoryRepo.save(category);
 	}
+	
 	
 	public void delete(Category category) {
 		

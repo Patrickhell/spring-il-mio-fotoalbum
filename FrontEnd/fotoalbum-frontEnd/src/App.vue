@@ -8,6 +8,9 @@
       <button v-if="!creatingMessage && activeImage == null" @click="creatingMessage = true" class="mx-2 btn btn-outline-success">
         Contattaci
       </button>
+      <a href="http://localhost:8080/loginORegistration" class="mx-2 btn btn-outline-success">
+             Accedi 
+      </a>
     </div>
     
     <message-form
@@ -19,13 +22,13 @@
     <div v-else> 
       <foto-index
       v-if="activeImage == null"
-      :images="images"
+      :userProfiles="userProfiles"
       @openImage="showImage"
       />
 
       <show-foto
       v-else
-       :image="activeImage"
+       :userProfile="activeImage"
         @closeImage="closeImage"
       />
 
@@ -43,7 +46,7 @@ import FotoIndex from './components/FotoIndex.vue';
 import ShowFoto from './components/ShowFoto.vue';
 import MessageForm from './components/MessageForm.vue';
 // DEFINE CONSTANT
- const images = ref(null);
+ const userProfiles = ref(null);
  const activeImage = ref(null);
  const titleToSearch = ref('');
  const creatingMessage= ref(false);
@@ -53,10 +56,10 @@ import MessageForm from './components/MessageForm.vue';
 
 
 const showImage = (id) => {
-  images.value.forEach((image) => {
+  userProfiles.value.forEach((userProfile) => {
 
-    if(image.id == id) {
-      activeImage.value = image;
+    if(userProfile.id == id) {
+      activeImage.value = userProfile;
     }
     
   });
@@ -73,8 +76,8 @@ const createdMessage = () => {
 }
 
 const updateImage = async () => {
-  const data = await axios.get("http://localhost:8080/api/fotoalbum");
-  images.value = data.data;
+  const data = await axios.get("http://localhost:8080/api/profiles");
+  userProfiles.value = data.data;
 };
 
 const getImageByTitle = async() => {
@@ -86,6 +89,7 @@ const getImageByTitle = async() => {
     images.value = data.data;
   }
 }
+
 
 onMounted(updateImage);
 </script>

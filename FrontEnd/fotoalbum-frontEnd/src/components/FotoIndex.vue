@@ -1,13 +1,15 @@
 <template>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col " v-for="image in images" :key="image.id" @click="$emit('openImage', image.id)">
+            <div class="col " v-for="userProfile in userProfiles" :key="userProfile.id" @click="$emit('openImage', userProfile.id)">
                 <div class="card singlecard" style="background-color: rgb(183, 185, 188); width: 280px;">
-                    <img :src="image.foto" class="card-img-top" alt="image" style="height: 200px;">
                     <div class="card-body d-flex align-items-center" style="height: 100px;">
                         <h5 class="card-title">
-                            {{ image.name }}
+                            {{ userProfile.name }}
                         </h5>
+                        <p>
+                            {{ userProfile.id }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -24,7 +26,7 @@ const emits = defineEmits(["openImage"]);
 
 //PROPS
 const props = defineProps( {
-    images: {
+    userProfiles: {
         type: Array,
         required: true
     }
